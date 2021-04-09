@@ -1,0 +1,14 @@
+venv/
+build/
+*.DS_store
+*.DS_Store
+*._.DS_store
+*._.DS_Store
+*.pyc
+*.csv
+*.log
+*.txt
+*__pycache__
+*.ipynb_notebooks
+*.vscode/
+tatras/static/*
