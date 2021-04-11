@@ -19,6 +19,7 @@ Tatras is a cloud native CD tool built to deploy single tenant applications from
 
 Tatras is recommended for cases when multiple parties require access to a single tenant application. This could be for deploying a PostgreSQL server for multiple teams, or by a SaaS company deploying a product for each customer. 
 
+More info can be found in the official Documentation(https://tatras.readthedocs.io/en/latest/)
 
 ## Installation
 
@@ -54,8 +55,5 @@ helm install tatras kubernetes/tatras/
 ```
 
 ## Contributor
-
-
-
 
 
