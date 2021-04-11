@@ -1,4 +1,4 @@
-# ![Test Image 1](tatras/tatras/static/images/tatras-small.svg) Tatras
+# ![Test Image 1](img/tatras-small.svg) Tatras
 
 
 Table of Contents
