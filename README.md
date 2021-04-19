@@ -1,4 +1,4 @@
-# ![Test Image 1](tatras/tatras/static/images/tatras-small.svg) Tatras
+# ![Test Image 1](img/tatras-small.svg) Tatras
 
 
 Table of Contents
@@ -24,11 +24,7 @@ Tatras is recommended for cases when multiple parties require access to a single
 
 Pull down repo, set up environment, and deploy
 ```bash
-git clone https://github.com/Extended-ERP/tatras.git
-cd tatras
-python3 -m venv venv
-source venv/bin/activate
-pip install ../tatras
+echo TBD
 ```
 
 ## Usage
@@ -39,23 +35,6 @@ pip install ../tatras
 ./dev/build.sh
 ```
 
-### Docker
-
-```bash
-./docker/build.sh
-```
-
-### Kubernetes
-
-This application can be deployed in Kubernetes using [Helm](https://helm.sh/)
-
-```bash
-helm install tatras kubernetes/tatras/
-```
-
 ## Contributor
-
-
-
 
 
