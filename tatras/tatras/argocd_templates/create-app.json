@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "name": "y",
+        "name": "str",
         "namespace": "argocd"
     },
     "spec": {
@@ -9,14 +9,14 @@
             "server": "https://kubernetes.default.svc"
         },
         "source": {
-            "repoURL": "https://github.com/Extended-ERP/extendederp.git",
-            "path": "kubernetes/helm/extendederp",
+            "repoURL": "str",
+            "path": "str",
             "helm": {
                 "parameters": [
                     {
                         "forceString": true,
                         "name": "customerName",
-                        "value": "y"
+                        "value": "str"
                     }
                 ],
                 "valueFiles": [

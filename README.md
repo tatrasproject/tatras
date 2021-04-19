@@ -1,4 +1,4 @@
-# ![Test Image 1](tatras/tatras/static/images/tatras-small.svg) Tatras
+# ![Test Image 1](tatras/images/tatras-small.svg) Tatras
 
 
 Table of Contents
@@ -24,11 +24,13 @@ Tatras is recommended for cases when multiple parties require access to a single
 
 Pull down repo, set up environment, and deploy
 ```bash
-git clone https://github.com/Extended-ERP/tatras.git
+git clone https://github.com/tatrasproject/tatras
 cd tatras
-python3 -m venv venv
+python virtualenv venv
 source venv/bin/activate
-pip install ../tatras
+pip install tatras/
+cd tatras
+uvicorn main:app --reload --host 0.0.0.0
 ```
 
 ## Usage
@@ -55,6 +57,7 @@ helm install tatras kubernetes/tatras/
 
 ## Contributor
 
+## Playing with ArgoCD CLI 
 Set ARGOCD_SERVER - do not include `https://`
 ```bash
 argocd.example.com

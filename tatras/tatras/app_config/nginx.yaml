@@ -1,0 +1,10 @@
+# Similar to a k8s CRD / values.yaml, an extension of ArgoCD's
+## Define the application to be created, set defaults here
+api: v1
+nginx:
+  repoURL:
+  path:
+  valuesOverride:
+    example_value_one: ""
+    example_value_two: {}
+    example_value_three: []

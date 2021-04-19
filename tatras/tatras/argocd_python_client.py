@@ -5,11 +5,15 @@ class APICall:
     ''' Generic api methods used across multiple classes
     '''
     def get(self, item_name):
+        ''' Retrieve a specific item from ArgoCD
+        '''
         r = requests.get(f"{self.auth.url}/api/v1/{self.route}/{item_name}", headers=self.auth.headers)
         r_dict = json.loads(r.text)
         return r_dict    
     
     def all(self):
+        ''' Return all items from ArgoCD
+        '''
         r = requests.get(f"{self.auth.url}/api/v1/{self.route}", headers=self.auth.headers)
         r_dict = json.loads(r.text)
         return r_dict
@@ -20,8 +24,18 @@ class Application(APICall):
     def __init__(self, auth):
         self.auth = auth
         
-    def post(self, **kwargs):
-        pass
+    def post(self, data):
+        ''' Create an application in ArgoCD.
+            ARGS:
+            data - dictionary
+                find the template for data in "app_config/create-app.json"
+        '''
+        r = requests.post(
+            f"{self.auth.url}/api/v1/{self.route}", 
+            data=json.dumps(data), headers=self.auth.headers
+            )
+        r_dict = json.loads(r.text)
+        return r_dict
         
 class Project(APICall):
     route = 'projects'
