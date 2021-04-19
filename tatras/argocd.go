@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-const url = "http://192.168.246.223:8000/api/v1/document"
+const url = "https://argocd.site.com/api/v1/applications"
 
 func main() {
 	resp, err := http.Get(url)
@@ -61,17 +61,3 @@ func documentFromJson(content string) []Document {
 type Document struct {
 	Name, File string
 }
-
-
-// func homePage(w http.ResponseWriter, r *http.Request) {
-// 	fmt.Fprintf(w, "Homepage Endpoint Hit")
-// }
-
-// func handleRequests() {
-// 	http.HandleFunc("/", homePage)
-// 	log.Fatal(http.ListenAndServe(":8001", nil))
-// }
-
-// func main() {
-// 	handleRequests()
-// }
