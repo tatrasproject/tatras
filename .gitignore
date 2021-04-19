@@ -8,6 +8,7 @@ build/
 *.csv
 *.log
 *.txt
+*.env
 *__pycache__
 *.ipynb_notebooks
 *.vscode/

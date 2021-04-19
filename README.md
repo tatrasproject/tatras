@@ -55,7 +55,21 @@ helm install tatras kubernetes/tatras/
 
 ## Contributor
 
+Set ARGOCD_SERVER - do not include `https://`
+```bash
+argocd.example.com
+```
 
+Install ArgoCD CLI
+```bash
+sudo curl -sSL -o /usr/local/bin/argocd ${ARGOCD_SERVER}/download/argocd-linux-amd64
+chmod 777 /usr/local/bin/argocd
+```
 
+Login to ArgoCD via CLI
 
+If using external DNS
+```bash
+argocd login $ARGOCD_SERVER --insecure --grpc-web
+```
 
