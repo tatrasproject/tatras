@@ -41,8 +41,6 @@ def create_application(item_name: str, q: Optional[str] = None):
     app['spec']['source']['helm']['parameters'][0]['value'] = item_name
     app['metadata']['name'] = item_name
 
-    print(app)
-
     r = argocd.applications.post(app)
 
     return {"item_name": item_name, "argo_response": r}
