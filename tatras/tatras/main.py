@@ -1,6 +1,6 @@
 from argocd_python_client import ArgoCD
 from config import (
-    ARGOCD_HOST, ARGOCD_USER, ARGOCD_PASSWORD,
+    ARGOCD_SERVER, ARGOCD_USER, ARGOCD_PASSWORD,
     SERVICE_CATALOG
 )
 from typing import Optional
@@ -8,7 +8,7 @@ from fastapi import FastAPI
 import json
 
 
-argocd = ArgoCD(ARGOCD_HOST, ARGOCD_USER, ARGOCD_PASSWORD)
+argocd = ArgoCD(ARGOCD_SERVER, ARGOCD_USER, ARGOCD_PASSWORD)
 app = FastAPI()
 
 

@@ -4,6 +4,9 @@ import json
 class APICall:
     ''' Generic api methods used across multiple classes
     '''
+    def __init__(self, auth):
+        self.auth = auth
+
     def get(self, item_name):
         ''' Retrieve a specific item from ArgoCD
         '''
@@ -18,17 +21,12 @@ class APICall:
         r_dict = json.loads(r.text)
         return r_dict
 
-class Application(APICall):
-    route = 'applications'
-    
-    def __init__(self, auth):
-        self.auth = auth
-        
     def post(self, data):
-        ''' Create an application in ArgoCD.
+        ''' Create an item in ArgoCD.
             ARGS:
-            data - dictionary
-                find the template for data in "app_config/create-app.json"
+                data (dictionary) - find templates for 'data' in "argocd_tempaltes/"
+            RETURNS:
+                r_dict (dict) - response from ArgoCD
         '''
         r = requests.post(
             f"{self.auth.url}/api/v1/{self.route}", 
@@ -36,12 +34,20 @@ class Application(APICall):
             )
         r_dict = json.loads(r.text)
         return r_dict
+
+class Application(APICall):
+    ''' Class for ArgoCD Application CRD.
+        Used to make python client look nice 
+        as well as for APICall method overrides. 
+    '''
+    route = 'applications'
         
 class Project(APICall):
+    ''' Class for ArgoCD Project CRD.
+        Used to make python client look nice 
+        as well as for APICall method overrides. 
+    '''
     route = 'projects'
-    
-    def __init__(self, auth):
-        self.auth = auth 
     
 class ArgoCD:
     ''' Primary class used to establish a client to an ArgoCD server
