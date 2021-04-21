@@ -1,77 +1,15 @@
 package main
 
 import (
-	"fmt"
-	// "log"
-	"net/http"
-	"io/ioutil"
-	"encoding/json"
-	"strings"
+	"github.com/gin-gonic/gin"
 )
 
-const url = "http://192.168.246.223:8000/api/v1/document"
-
 func main() {
-	resp, err := http.Get(url)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("Response Type %T\n", resp)
-
-	defer resp.Body.Close()
-
-	bytes, err := ioutil.ReadAll(resp.Body)
-	
-	if err != nil {
-		panic(err)
-	}
-
-	content := string(bytes)
-	fmt.Printf("Response: %v \n", content)
-
-	documents := documentFromJson(content)
-	for _, document := range documents {
-		fmt.Println(document.Name)
-	}
-
+	r := gin.Default()
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "hello-world!",
+		})
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
-
-func documentFromJson(content string) []Document {
-	documents := make([]Document, 0, 20)
-
-	decoder := json.NewDecoder(strings.NewReader(content))
-	_, err := decoder.Token()
-	if err != nil {
-		panic(err)
-	}
-
-	var document Document
-	for decoder.More() {
-		err := decoder.Decode(&document)
-		if err != nil {
-			panic(err)
-		}
-		documents = append(documents, document)
-	}
-	return documents
-
-}
-
-type Document struct {
-	Name, File string
-}
-
-
-// func homePage(w http.ResponseWriter, r *http.Request) {
-// 	fmt.Fprintf(w, "Homepage Endpoint Hit")
-// }
-
-// func handleRequests() {
-// 	http.HandleFunc("/", homePage)
-// 	log.Fatal(http.ListenAndServe(":8001", nil))
-// }
-
-// func main() {
-// 	handleRequests()
-// }
