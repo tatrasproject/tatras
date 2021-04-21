@@ -3,7 +3,7 @@ jobs:
     runs-on: ubuntu-16.04
     strategy:
       matrix:
-        go: [ '1.15', '1.14', '1.13' ]
+        go: [ '1.16', '1.15', '1.14', '1.13' ]
     name: Go ${{ matrix.go }} test
     steps:
       - uses: actions/checkout@v2
@@ -11,4 +11,4 @@ jobs:
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go }}
-      - run: go run test.go
+      - run: go test

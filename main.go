@@ -4,12 +4,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
+// Setup
+func setupRouter() *gin.Engine {
+
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "hello-world!",
-		})
+	r.GET("/ping", func(c *gin.Context) {
+		c.String(200, "pong")
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
+	return r
+}
+
+func main() {
+	r := setupRouter()
+	r.Run(":8080")
 }
