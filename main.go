@@ -1,16 +1,16 @@
 package main
 
 import (
+	h "tatras/handlers"
+
 	"github.com/gin-gonic/gin"
 )
 
 // Setup
 func setupRouter() *gin.Engine {
-
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
-	})
+
+	r.GET("/ping", h.PingHandler)
 
 	return r
 }
