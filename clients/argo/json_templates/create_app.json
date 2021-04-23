@@ -1,0 +1,28 @@
+{
+    "metadata": {
+        "name": "str",
+        "namespace": "argocd"
+    },
+    "spec": {
+        "destination": {
+            "namespace": "y",
+            "server": "https://kubernetes.default.svc"
+        },
+        "source": {
+            "repoURL": "str",
+            "path": "str",
+            "helm": {
+                "parameters": [
+                    {
+                        "forceString": true,
+                        "name": "helmValuesKeyHere",
+                        "value": "str"
+                    }
+                ],
+                "valueFiles": [
+                    "values.yaml"
+                ]
+            }
+        }
+    }
+}

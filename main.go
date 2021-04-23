@@ -15,11 +15,14 @@ func setupRouter() *gin.Engine {
 	clients.GetClientSetFromStandalone()
 
 	r.GET("/ping", h.PingHandler)
+	
+	r.GET("/argo/:application", h.GetArgoApplication)
+	r.POST("/argo/:application", h.CreateArgoApplication)
 
 	return r
 }
 
 func main() {
 	r := setupRouter()
-	r.Run(":8080")
+	r.Run("0.0.0.0:8080")
 }
