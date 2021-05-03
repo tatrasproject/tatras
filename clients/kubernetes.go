@@ -4,7 +4,11 @@ import (
 	"flag"
 	"path/filepath"
 
-	"k8s.io/client-go/kubernetes"
+	argov1 "github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1"
+
+	"k8s.io/apimachinery/pkg/runtime/schema"
+	"k8s.io/apimachinery/pkg/runtime/serializer"
+	"k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/homedir"
@@ -19,13 +23,7 @@ import (
 	// _ "k8s.io/client-go/plugin/pkg/client/auth/openstack"
 )
 
-func GetClientSetFromInCluster() (*kubernetes.Clientset, error) {
-	// creates the in-cluster config
-	config, _ := rest.InClusterConfig()
-	return kubernetes.NewForConfig(config)
-}
-
-func GetClientSetFromStandalone() (*kubernetes.Clientset, error) {
+func GetClientSet() (*rest.RESTClient, error) {
 	var kubeconfig *string
 	if home := homedir.HomeDir(); home != "" {
 		kubeconfig = flag.String("kubeconfig", filepath.Join(home, ".kube", "config"), "(optional) absolute path to the kubeconfig file")
@@ -35,9 +33,19 @@ func GetClientSetFromStandalone() (*kubernetes.Clientset, error) {
 	flag.Parse()
 
 	// use the current context in kubeconfig
-	config, _ := clientcmd.BuildConfigFromFlags("", *kubeconfig)
+	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
+	if err != nil {
+		panic(err)
+	}
+
+	argov1.AddToScheme(scheme.Scheme)
+	crdConfig := *config
+	crdConfig.ContentConfig.GroupVersion = &schema.GroupVersion{Group: argov1.SchemeGroupVersion.Group, Version: argov1.SchemeGroupVersion.Version}
+	crdConfig.APIPath = "/apis"
+	crdConfig.NegotiatedSerializer = serializer.NewCodecFactory(scheme.Scheme)
+	crdConfig.UserAgent = rest.DefaultKubernetesUserAgent()
 
 	// return the clientset
-	return kubernetes.NewForConfig(config)
+	return rest.UnversionedRESTClientFor(&crdConfig)
 
 }
