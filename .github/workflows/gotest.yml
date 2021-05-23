@@ -22,6 +22,11 @@ jobs:
         with:
           k3s-version: ${{matrix.k3s}}
           traefik-enabled: false
+      - name: Install ArgoCD
+        run: |
+          echo "Getting ArgoCD"
+          helm repo add argo https://argoproj.github.io/argo-helm
+          helm upgrade --install --name argocd argo/argo-cd
       - name: Setup go
         uses: actions/setup-go@v1
         with:
