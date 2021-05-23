@@ -26,7 +26,7 @@ jobs:
         run: |
           echo "Getting ArgoCD"
           helm repo add argo https://argoproj.github.io/argo-helm
-          helm upgrade --install --name argocd argo/argo-cd
+          helm upgrade --install argocd argo/argo-cd
       - name: Setup go
         uses: actions/setup-go@v1
         with:
