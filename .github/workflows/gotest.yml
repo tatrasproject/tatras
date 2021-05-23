@@ -13,7 +13,7 @@ jobs:
       matrix:
         go: [ '1.16', '1.15', '1.14', '1.13' ]
         k3s: ['v1.20.0+k3s2', 'v1.19.11+k3s1', 'v1.21.1+k3s1']
-    name: Go ${{ matrix.go }} test k3s {{matrix.k3s}}
+    name: Go ${{ matrix.go }} test k3s ${{ matrix.k3s }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
