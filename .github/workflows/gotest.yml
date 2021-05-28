@@ -11,11 +11,22 @@ jobs:
     runs-on: ubuntu-16.04
     strategy:
       matrix:
-        go: [ '1.16', '1.15', '1.14', '1.13' ]
-    name: Go ${{ matrix.go }} test
+        go: [ '1.16', '1.15']
+        k3s: ['v1.20.0+k3s2', 'v1.19.11+k3s1', 'v1.21.1+k3s1']
+    name: Go ${{ matrix.go }} test k3s ${{ matrix.k3s }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
+      - name: Setup Cluster
+        uses: jupyterhub/action-k3s-helm@v1
+        with:
+          k3s-version: ${{matrix.k3s}}
+          traefik-enabled: false
+      - name: Install ArgoCD
+        run: |
+          echo "Getting ArgoCD"
+          helm repo add argo https://argoproj.github.io/argo-helm
+          helm upgrade --install argocd argo/argo-cd
       - name: Setup go
         uses: actions/setup-go@v1
         with:
